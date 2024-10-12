@@ -2,7 +2,7 @@ import { cart,removeFromCart,updateDeliveryOption } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/currency.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
-import {deliveryOption} from "../data/DeliveryOption.js"
+import {deliveryOptions} from "../data/DeliveryOption.js"
 
 
 
@@ -19,13 +19,14 @@ import {deliveryOption} from "../data/DeliveryOption.js"
   });
  
   const deliveryOptionId=cartItem.deliveryOptionId;
-  let deliveryOptions;
-  deliveryOption.forEach((option)=>{
-    if(option.id===deliveryOptionId)deliveryOptions=option;
+  let deliveryOption;
+  deliveryOptions.forEach((option)=>{
+    if(option.id===deliveryOptionId)
+      deliveryOption=option;
   });
   const today=dayjs();
   const deliveryDate=today.add(
-    deliveryOptions.deliveryDays,'days' 
+    deliveryOption.deliveryDays,'days' 
   );
   const dateString=deliveryDate.format(
     'dddd, MMMM, D'
@@ -34,7 +35,7 @@ import {deliveryOption} from "../data/DeliveryOption.js"
     <div class="cart-item-container
        js-cart-item-container-${matchingProduct.id}">
       <div class="delivery-date">
-        Delivery date:${dateString}
+        Delivery date: ${dateString}
       </div>
 
       <div class="cart-item-details-grid">
@@ -74,23 +75,23 @@ import {deliveryOption} from "../data/DeliveryOption.js"
  });
  function deliveryOptionhtml(matchingProduct,cartItem){
   let html=''
-  deliveryOption.forEach((deliveryOptions)=>{
+  deliveryOptions.forEach((deliveryOption)=>{
     const today=dayjs();
     const deliveryDate=today.add(
-      deliveryOptions.deliveryDays,'days' 
+      deliveryOption.deliveryDays,'days' 
     );
     const dateString=deliveryDate.format(
       'dddd, MMMM, D'
     );
-    const priceString=deliveryOptions.priceCents===0
+    const priceString=deliveryOption.priceCents===0
     ?'FREE'
-    : `$${formatCurrency(deliveryOptions.priceCents)}`;
+    : `$${formatCurrency(deliveryOption.priceCents)}`;
 
-    const isChecked=deliveryOptions.id===cartItem.deliveryOptionId;
+    const isChecked=deliveryOption.id===cartItem.deliveryOptionId;
     html+=
     `
       <div class="delivery-option data-product-id="${matchingProduct.id}"
-      data-delivery-option="${deliveryOptions.id}"">
+      data-delivery-option="${deliveryOption.id}"">
         <input type="radio"
           ${isChecked ?'checked':''}
           class="delivery-option-input"
