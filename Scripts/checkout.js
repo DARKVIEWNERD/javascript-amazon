@@ -63,7 +63,7 @@ import {deliveryOptions} from "../data/DeliveryOption.js"
           </div>
         </div>
 
-        <div class="delivery-options js-delivery-option" >
+        <div class="delivery-options"  >
           <div class="delivery-options-title">
             Choose a delivery option:
           </div>
@@ -90,8 +90,9 @@ import {deliveryOptions} from "../data/DeliveryOption.js"
     const isChecked=deliveryOption.id===cartItem.deliveryOptionId;
     html+=
     `
-      <div class="delivery-option data-product-id="${matchingProduct.id}"
-      data-delivery-option="${deliveryOption.id}"">
+      <div class="delivery-option js-delivery-option"
+       data-product-id="${matchingProduct.id}"
+      data-delivery-option-id="${deliveryOption.id}">
         <input type="radio"
           ${isChecked ?'checked':''}
           class="delivery-option-input"
@@ -121,6 +122,7 @@ document.querySelectorAll('.js-delete-link')
   });
   
 });
+
 document.querySelectorAll('.js-delivery-option')
 .forEach((element)=>{
     element.addEventListener('click',()=>{
