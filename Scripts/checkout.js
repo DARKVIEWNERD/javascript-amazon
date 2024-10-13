@@ -128,6 +128,6 @@ document.querySelectorAll('.js-delivery-option')
     element.addEventListener('click',()=>{
       const {productId,deliveryOptionId}=element.dataset;
       updateDeliveryOption(productId,deliveryOptionId);
-      alert('Delivery option updated successfully');
+     
     });
 });
