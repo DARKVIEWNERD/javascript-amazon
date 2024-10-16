@@ -26,7 +26,7 @@ const headerhtml=
   `;
   document.getElementById('checkout-container').innerHTML = headerhtml;
 }
-renderCheckoutHeader();
+
 
 
 
