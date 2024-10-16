@@ -14,9 +14,18 @@ export let cart= JSON.parse(localStorage.getItem('cart'));
       }];
     }
 
+  
 function saveToStorage(){
   localStorage.setItem('cart',JSON.stringify(cart));
 }
+export function calculateCartQuantity() { // Idinagdag ang function na ito
+  let cartquantity = 0;
+  cart.forEach((item) => {
+    cartquantity += item.quantity;
+  });
+  return cartquantity; // Nagbabalik ng kabuuang dami ng cart items
+}
+console.log(calculateCartQuantity());
 export function addToCart(productId){
   let matchingItem;
     
